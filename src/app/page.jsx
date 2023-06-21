@@ -4,6 +4,8 @@ import Link from 'next/link';
 
 import QRCode from 'react-qr-code';
 
+const revalidate = 600;
+
 export default async function Home() {
   const response = await fetch('https://api.github.com/users/ulissus/repos');
   const repos = await response.json();
