@@ -4,10 +4,12 @@ import Link from 'next/link';
 
 import QRCode from 'react-qr-code';
 
-const revalidate = 600;
-
 export default async function Home() {
-  const response = await fetch('https://api.github.com/users/ulissus/repos');
+  const response = await fetch('https://api.github.com/users/ulissus/repos', {
+    next: {
+      revalidate: 600,
+    },
+  });
   const repos = await response.json();
 
   const projects = repos.map(item => {
@@ -17,6 +19,8 @@ export default async function Home() {
     };
     return link;
   });
+
+  console.log(projects);
 
   return (
     <main>

@@ -1,10 +1,14 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-const revalidate = 60;
+const revalidate = 600;
 
 export default async function Projeto({ params }) {
-  const response = await fetch('https://api.github.com/users/ulissus/repos');
+  const response = await fetch('https://api.github.com/users/ulissus/repos', {
+    next: {
+      revalidate: 600,
+    },
+  });
   const repos = await response.json();
 
   const project = repos.find(item => item.id == params.id);
